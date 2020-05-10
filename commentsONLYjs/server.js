@@ -27,3 +27,13 @@ const server = app.listen(port, listening);
 function listening(){
     console.log(`running localhost: ${port}`);
 };
+// GET function 
+app.get('/', function (req, res) {
+    res.send('projectData');
+  })
+
+  // POST function
+  app.post('/addData', function (req, res) {
+    projectData.push(req.body);
+    res.send('Working!');
+  })
