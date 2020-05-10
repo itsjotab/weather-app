@@ -21,7 +21,6 @@ body{
 }
 
 .entry{
-    background: rgba(59, 74, 107, .4);
 }
 
 # entryHolder {
@@ -29,7 +28,6 @@ body{
 }
 
 #date{
-    color: black;
 }
 
 #temp{
