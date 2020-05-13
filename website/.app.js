@@ -1,52 +1,75 @@
 /* Global Variables */
 const Url = 'hhtps://api.openweathermap.org/data/2.5/weather?zip=';
-const keyApi = ''
-
-//HTML variables for events
-const button = document.getElementById('generate');
-
-//HTML elements to update
-const zipCode = document.getElementById('zip');
-const feelings = document.getElementById('feelings')
-
+const keyApi = '8e77ce8fdd43b74cdfa1a37d0567c630'
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
+//HTML variables for events
+const button = document.getElementById('generate').addEventListener('click', getResults);
 
-const weatherData = async ( Url, areaCode, keyAPI ) => {
-      const response = await fetch(Url + areaCode + keyApi, {
-      method: 'POST', 
-      credentials: 'same-origin',
-      headers: {
-          'Content-Type': 'application/json',
-      }),
-
-        body: JSON.stringify(projectData), 
-    });
-
-      try {
-        const newData = await  response.json();
-        console.log(newData);
-        return newData;
-      } catch(error) {
-      console.log("error", error);
-      }
-  }
-
-  button.addEventListener ('click',   
-  getWeather(url, zip.value, keyApi)
-  .then(temp => {
+// function called by event listner
+function getResults(e) {
+const areaCode = document.getElementById('zip');
+const feelings = document.getElementById('feelings')
+   
+getWeather(url, zip.value, keyApi)
+ .then(temp => {
     return {date: newDate, temp, content: feelings.value}
   })
   .then(data => {
     saveData('/api/projectdata', data)
     return data
   })
-  .then(({temp, date, content}) => updateUI(temp, date, content))
+  .then(({date, temp, content}) => updateUI(date, temp, content))
   .catch(e => {
-    // There can be proper error handling with UI
     console.error(e)
   })
 })
+
+// function to GET web API data
+ const weatherData = async ( Url, areaCode, keyAPI ) => {
+      const response = await fetch(Url + areaCode + keyApi );
+      try {
+        const newData = await  response.json();
+        console.log(newData);
+      } catch(error) {
+      console.log("error", error);
+      }
+  }
+
+/* Function to POST data */
+const postData = async ( url = '', data = {})=>{
+  console.log(data)
+    const response = await fetch(url, {
+    method: 'POST', 
+    credentials: 'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),       
+  });
+
+    try {
+      const newData = await response.json();
+      return newData
+    }catch(error) {
+    console.log("error", error);
+    }
+} 
+
+// function to GET project Data
+const updateUI = async () => {
+  const request = await fetch('/all');
+  try{
+    const allData = await request.json();
+    document.getElementById('date').innerHTML = allData[0].date;
+    document.getElementById('temp').innerHTML = allData[0].temp;
+    document.getElementById('content').innerHTML = allData[0].content;
+
+  }catch(error){
+    console.log("error", error);
+  }
+}
+
