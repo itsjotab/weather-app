@@ -26,7 +26,6 @@ getWeather(url, zip.value, keyApi)
   .catch(e => {
     console.error(e)
   })
-})
 
 // function to GET web API data
  const weatherData = async ( Url, areaCode, keyAPI ) => {
@@ -71,5 +70,4 @@ const updateUI = async () => {
   }catch(error){
     console.log("error", error);
   }
-}
-
+}}
