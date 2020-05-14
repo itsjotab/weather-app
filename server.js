@@ -35,5 +35,5 @@ app.get('/all', (res, req) => {
   // POST function
   app.post('/addData', (req, res) => {
     console.log(req.body)
-   data.push(req.body)
+   projectData = req.body;
 }
