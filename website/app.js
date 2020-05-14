@@ -14,7 +14,7 @@ function getResults(e) {
 const areaCode = document.getElementById('zip');
 const feelings = document.getElementById('feelings')
    
-getWeather(url, zip.value, apiKey)
+getWeather(Url, zip.value, apiKey)
  .then(temp => {
     return {date: newDate, temp, content: feelings.value}
   })
@@ -39,9 +39,9 @@ getWeather(url, zip.value, apiKey)
   }
 
 /* Function to POST data */
-const postData = async ( url = '', data = {})=>{
+const postData = async ( Url = '', projectData = {})=>{
   console.log(data)
-    const response = await fetch(url, {
+    const response = await fetch(Url, apiKey {
     method: 'POST', 
     credentials: 'same-origin',
     headers: {
