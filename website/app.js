@@ -1,12 +1,12 @@
 /* Global Variables */
 const Url = 'hhtps://api.openweathermap.org/data/2.5/weather?zip=';
-const keyApi = '8e77ce8fdd43b74cdfa1a37d0567c630'
+const apiKey = '8e77ce8fdd43b74cdfa1a37d0567c630'
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-//HTML variables for events
+/* Function called by event listener */
 const button = document.getElementById('generate').addEventListener('click', getResults);
 
 // function called by event listner
@@ -14,7 +14,7 @@ function getResults(e) {
 const areaCode = document.getElementById('zip');
 const feelings = document.getElementById('feelings')
    
-getWeather(url, zip.value, keyApi)
+getWeather(url, zip.value, apiKey)
  .then(temp => {
     return {date: newDate, temp, content: feelings.value}
   })
@@ -28,8 +28,8 @@ getWeather(url, zip.value, keyApi)
   })
 
 // function to GET web API data
- const weatherData = async ( Url, areaCode, keyAPI ) => {
-      const response = await fetch(Url + areaCode + keyApi );
+ const weatherData = async ( Url, areaCode, apiKey ) => {
+      const response = await fetch(Url + areaCode + apiKey );
       try {
         const newData = await  response.json();
         console.log(newData);
