@@ -28,12 +28,12 @@ function listening(){
     console.log(`running localhost: ${port}`);
 };
 // GET function 
-app.get('/', function (req, res) {
+app.get('/all', (res, req) => {
     res.send('projectData');
   })
 
   // POST function
-  app.post('/addData', function (req, res) {
-    projectData.push(req.body);
-    res.send('Working!');
-  })
+  app.post('/addData', (req, res) => {
+    console.log(req.body)
+   data.push(req.body)
+}

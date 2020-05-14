@@ -39,9 +39,9 @@ getWeather(Url, zip.value, apiKey)
   }
 
 /* Function to POST data */
-const postData = async ( Url = '', projectData = {})=>{
+const postData = async ( Url = '', data = {})=>{
   console.log(data)
-    const response = await fetch(Url, apiKey {
+    const response = await fetch(Url, {
     method: 'POST', 
     credentials: 'same-origin',
     headers: {
@@ -60,7 +60,7 @@ const postData = async ( Url = '', projectData = {})=>{
 
 // function to GET project Data
 const updateUI = async () => {
-  const request = await fetch('/all');
+  const request = await fetch('/all', projectData = {});
   try{
     const allData = await request.json();
     document.getElementById('date').innerHTML = allData[0].date;
