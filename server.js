@@ -20,7 +20,7 @@ app.use(cors())
 app.use(express.static('website'));
 
 //port variable
-const port = 6000;
+const port = 8000;
 
 // Setup Server
 const server = app.listen(port, listening);
@@ -30,10 +30,10 @@ function listening(){
 // GET function 
 app.get('/all', (res, req) => {
     res.send('projectData');
-  })
+  });
 
   // POST function
   app.post('/addData', (req, res) => {
     console.log(req.body)
    projectData = req.body;
-}
+});
