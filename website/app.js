@@ -7,13 +7,12 @@ let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
 /* Function called by event listener */
-const button = document.getElementById('generate').addEventListener('click', getResults);
-
-// function called by event listner
-function getResults(e) {
+const button = document.getElementById('generate')
 const areaCode = document.getElementById('zip');
 const feelings = document.getElementById('feelings')
-   
+
+//event listner
+button.addEventListener('click', () => {
 getWeather(Url, zip.value, apiKey)
  .then(temp => {
     return {date: newDate, temp, content: feelings.value}
@@ -26,6 +25,7 @@ getWeather(Url, zip.value, apiKey)
   .catch(error => {
     console.error(e)
   })
+})
 
 // function to GET web API data
  const weatherData = async ( Url, areaCode, apiKey ) => {
@@ -70,4 +70,4 @@ const updateUI = async () => {
   }catch(error){
     console.log("error", error);
   }
-}}
+}
