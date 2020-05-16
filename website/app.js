@@ -1,6 +1,6 @@
 /* Global Variables */
-const Url = 'hhtps://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = '&appid=8e77ce8fdd43b74cdfa1a37d0567c630&units=metric'
+const Url = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+const apiKey = ',us&appid=8e77ce8fdd43b74cdfa1a37d0567c630&units=metric'
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -13,29 +13,33 @@ const feelings = document.getElementById('feelings')
 
 //event listner
 button.addEventListener('click', () => {
-getWeather(Url, zip.value, apiKey)
+weatherData(Url, areaCode, apiKey)
  .then(temp => {
     return {date: newDate, temp, content: feelings.value}
   })
   .then(data => {
-    saveData('/api/projectdata', data)
+    postData('/addData', data)
     return data
   })
   .then(({date, temp, content}) => updateUI(date, temp, content))
   .catch(error => {
-    console.error(e)
+    console.error(error)
   })
 })
 
 // function to GET web API data
  const weatherData = async ( Url, areaCode, apiKey ) => {
-      const response = await fetch(`${baseUrl}?zip=${zip}&units=metric&APPID=${apiKey}`);
+      const response = await fetch(`${Url}${areaCode.value}${apiKey}`);
       try {
         const newData = await  response.json();
         console.log(newData);
-      } catch(error) {
-      console.log("error", error);
-      }
+       const {
+        main: {temp},
+      } = newData
+      return temp;
+    } catch (error) {
+      console.log ('error', error)
+    }
   }
 
 /* Function to POST data */
